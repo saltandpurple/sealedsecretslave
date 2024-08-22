@@ -4,6 +4,8 @@ source_context=""
 source_namespace=""
 destination_context=""
 destination_namespace=""
+retain_cleartext_secrets=""
+mode=""
 
 echo ""
 echo "#### SEALED SECRET SLAVE ###"
@@ -12,6 +14,25 @@ echo ""
 # Evaluate flags
 while [[ $# -gt 0 ]]; do
   case $1 in
+# todo: add bulk and live encrypt mode
+#    -i)
+#      if [-n "$mode"]; then
+#         echo "Only one mode-flag can be set at a time."
+#         exit 1;
+#      fi;
+#      mode="import"
+#      shift 1
+#      ;;
+#    -b)
+#      if [-n "$mode"]; then
+#         echo "Only one mode-flag can be set at a time."
+#         exit 1;
+#      fi;
+#      mode="bulk"
+    -r)
+      retain_cleartext_secrets=1
+      shift 1
+      ;;
     -sc)
       source_context="$2"
       shift 2
@@ -26,10 +47,6 @@ while [[ $# -gt 0 ]]; do
       ;;
     -dn)
       destination_namespace="$2"
-      shift 2
-      ;;
-    -r)
-      retain_cleartext_secrets=1
       shift 2
       ;;
     *)
@@ -48,9 +65,9 @@ if [ -z "$source_context" ]; then
     echo "Invalid context selected."
     exit 1
   fi
+else
+  echo "Using source context: $source_context"
 fi
-
-echo ""
 
 if [ -z "$source_namespace" ]; then
   kubectl config use-context "$source_context"
@@ -62,9 +79,9 @@ if [ -z "$source_namespace" ]; then
     echo "Invalid namespace selected."
     exit 1
   fi
+else
+  echo "Using source namespace: $source_namespace"
 fi
-
-echo ""
 
 if [ -z "$destination_context" ]; then
 #  echo "Available contexts:"
@@ -74,9 +91,9 @@ if [ -z "$destination_context" ]; then
     echo "Invalid context selected."
     exit 1
   fi
+else
+  echo "Using destination context: $destination_context"
 fi
-
-echo ""
 
 if [ -z "$destination_namespace" ]; then
 #  kubectl config use-context "$destination_context"
@@ -88,6 +105,8 @@ if [ -z "$destination_namespace" ]; then
 #    echo "Invalid namespace selected."
 #    exit 1
 #  fi
+else
+  echo "Using destination namespace: $destination_namespace"
 fi
 
 echo ""
@@ -104,12 +123,10 @@ do
 done
 
 # Recrypt and delete cleartext secrets (unless -r is set)
-#kubectl config use-context $destination_context
-#for secret in
+for secret in *.yaml; do
+  kubeseal --context "$destination_context" --namespace "$destination_namespace" -o yaml < "$secret" > "$secret-sealed.yaml"
+  if [ -z "$retain_cleartext_secrets" ]; then
+    rm "$secret"
+  fi
+done
 
-
-
-
-# todo: recrypt to correct destination ns and context
-# todo: convert to installable brew package
-# todo: create tap
