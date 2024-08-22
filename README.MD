@@ -19,7 +19,6 @@ sss -sc source-context -sn source-namespace -dc destination-context -dn destinat
 
 
 ### todo: 
-- convert to installable brew package
-- create tap
 - extend readme
-- add modes: bulk encrypt, live encrypt
+- add modes: bulk encrypt, live encrypt with base64 decoding
+- auto-generate .gitignore to prevent cleartext secrets from being committed
