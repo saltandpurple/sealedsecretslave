@@ -111,7 +111,5 @@ done
 
 
 # todo: recrypt to correct destination ns and context
-# todo: push to repo
 # todo: convert to installable brew package
 # todo: create tap
-# todo: allow multiple namespaces?
