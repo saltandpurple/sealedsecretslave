@@ -22,3 +22,5 @@ sss -sc source-context -sn source-namespace -dc destination-context -dn destinat
 - extend readme
 - add modes: bulk encrypt, live encrypt with base64 decoding
 - auto-generate .gitignore to prevent cleartext secrets from being committed
+- add more helpful bash output
+- fix file naming

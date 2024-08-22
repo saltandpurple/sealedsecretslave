@@ -123,7 +123,7 @@ done
 
 # Recrypt and delete cleartext secrets (unless -r is set)
 for secret in *.yaml; do
-  kubeseal --context "$destination_context" --namespace "$destination_namespace" -o yaml < "$secret" > "$secret-sealed.yaml"
+  kubeseal --context "$destination_context" --namespace "$destination_namespace" -o yaml < "$secret" > "$secret.sealed"
   if [ -z "$retain_cleartext_secrets" ]; then
     rm "$secret"
   fi
