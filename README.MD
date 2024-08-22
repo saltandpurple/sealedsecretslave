@@ -6,7 +6,7 @@ Can be configured to retain cleartext secrets (careful, don't commit them to git
 ## Usage
 
 ```bash
-sealed-secret-slave -sc source-context -sn source-namespace -dc destination-context -dn destination-namespace
+sss -sc source-context -sn source-namespace -dc destination-context -dn destination-namespace (-r)
 ```
 
 ## Parameters
