@@ -22,3 +22,4 @@ sealed-secret-slave -sc source-context -sn source-namespace -dc destination-cont
 - convert to installable brew package
 - create tap
 - extend readme
+- add modes: bulk encrypt, live encrypt

@@ -14,7 +14,6 @@ echo ""
 # Evaluate flags
 while [[ $# -gt 0 ]]; do
   case $1 in
-# todo: add bulk and live encrypt mode
 #    -i)
 #      if [-n "$mode"]; then
 #         echo "Only one mode-flag can be set at a time."
