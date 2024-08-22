@@ -26,3 +26,4 @@ sss -sc source-context -sn source-namespace -dc destination-context -dn destinat
 - auto-generate .gitignore to prevent cleartext secrets from being committed
 - add more helpful bash output
 - fix file naming
+- multiple namespaces with regex (e.g. rocs-eu-uat-.*)
