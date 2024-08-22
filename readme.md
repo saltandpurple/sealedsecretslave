@@ -18,6 +18,7 @@ sealed-secret-slave -sc source-context -sn source-namespace -dc destination-cont
 - -r Retain cleartext secrets
 
 
-### todo: convert to installable brew package
-### todo: create tap
-### todo: write readme
+### todo: 
+- convert to installable brew package
+- create tap
+- extend readme
